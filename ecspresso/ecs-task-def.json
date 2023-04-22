@@ -9,12 +9,12 @@
         }
       ],
       "essential": true,
-      "image": "{{ tfstate 'data.aws_ecr_repository.nginx.repository_url' }}:{{ must_env 'IMAGE_TAG' }}",
+      "image": "773386508018.dkr.ecr.ap-northeast-1.amazonaws.com/yasu-prod-foobar-nginx:latest",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "{{ tfstate 'data.aws_cloudwatch_log_group.nginx.name' }}",
-          "awslogs-region": "{{ must_env 'AWS_REGION' }}",
+          "awslogs-group": "/ecs/yasu-prod-foobar/nginx",
+          "awslogs-region": "ap-northeast-1",
           "awslogs-stream-prefix": "ecs"
         }
       },
@@ -37,12 +37,12 @@
     {
       "cpu": 0,
       "essential": true,
-      "image": "{{ tfstate 'data.aws_ecr_repository.php.repository_url' }}:{{ must_env 'IMAGE_TAG' }}",
+      "image": "773386508018.dkr.ecr.ap-northeast-1.amazonaws.com/yasu-prod-foobar-php:latest",
       "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-          "awslogs-group": "{{ tfstate 'data.aws_cloudwatch_log_group.php.name' }}",
-          "awslogs-region": "{{ must_env 'AWS_REGION' }}",
+          "awslogs-group": "/ecs/yasu-prod-foobar/php",
+          "awslogs-region": "ap-northeast-1",
           "awslogs-stream-prefix": "ecs"
         }
       },
@@ -56,14 +56,14 @@
       "secrets": [
         {
           "name": "APP_KEY",
-          "valueFrom": "/{{ must_env 'SYSTEM_NAME' }}/{{ must_env 'ENV_NAME' }}/{{ must_env 'SERVICE_NAME' }}/APP_KEY"
+          "valueFrom": "/yasu/prod/foobar/APP_KEY"
         }
       ]
     }
   ],
   "cpu": "256",
-  "executionRoleArn": "{{ tfstate 'data.aws_iam_role.ecs_task_execution.arn' }}",
-  "family": "{{ must_env 'SYSTEM_NAME' }}-{{ must_env 'ENV_NAME' }}-{{ must_env 'SERVICE_NAME' }}",
+  "executionRoleArn": "arn:aws:iam::773386508018:role/yasu-prod-foobar-ecs-task-execution",
+  "family": "yasu-prod-foobar",
   "ipcMode": "",
   "memory": "512",
   "networkMode": "awsvpc",
@@ -74,18 +74,18 @@
   "tags": [
     {
       "key": "Env",
-      "value": "{{ must_env 'ENV_NAME' }}"
+      "value": "prod"
     },
     {
       "key": "System",
-      "value": "{{ must_env 'SYSTEM_NAME' }}"
+      "value": "yasu"
     },
     {
       "key": "Name",
-      "value": "{{ must_env 'SYSTEM_NAME' }}-{{ must_env 'ENV_NAME' }}-{{ must_env 'SERVICE_NAME' }}"
+      "value": "yasu-prod-foobar"
     }
   ],
-  "taskRoleArn": "{{ tfstate 'data.aws_iam_role.ecs_task.arn' }}",
+  "taskRoleArn": "arn:aws:iam::773386508018:role/yasu-prod-foobar-ecs-task",
   "volumes": [
     {
       "host": {},

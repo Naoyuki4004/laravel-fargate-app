@@ -26,18 +26,18 @@
     {
       "containerName": "nginx",
       "containerPort": 80,
-      "targetGroupArn": "{{ tfstate 'data.aws_lb_target_group.this.arn' }}"
+      "targetGroupArn": "arn:aws:elasticloadbalancing:ap-northeast-1:773386508018:targetgroup/yasu-prod-foobar/3f0ec721be0c63f9"
     }
   ],
   "networkConfiguration": {
     "awsvpcConfiguration": {
       "assignPublicIp": "DISABLED",
       "securityGroups": [
-        "{{ tfstate 'data.aws_security_group.vpc.id' }}"
+        "sg-0e7e0f00bad366399"
       ],
       "subnets": [
-        "{{ tfstate 'data.aws_subnet.private['a'].id' }}",
-        "{{ tfstate 'data.aws_subnet.private['c'].id' }}"
+        "subnet-0df9e5ac1f4fbb643",
+        "subnet-036340d9ea3ab1263"
       ]
     }
   },
@@ -50,15 +50,15 @@
   "tags": [
     {
       "key": "Env",
-      "value": "{{ must_env 'ENV_NAME' }}"
+      "value": "prod"
     },
     {
       "key": "System",
-      "value": "{{ must_env 'SYSTEM_NAME' }}"
+      "value": "yasu"
     },
     {
       "key": "Name",
-      "value": "{{ must_env 'SYSTEM_NAME' }}-{{ must_env 'ENV_NAME' }}-{{ must_env 'SERVICE_NAME' }}"
+      "value": "yasu-prod-foobar"
     }
   ]
 }
