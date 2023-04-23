@@ -66,7 +66,6 @@
   "family": "{{ must_env `SYSTEM_NAME` }}-{{ must_env `ENV_NAME` }}-{{ must_env `SERVICE_NAME` }}",
   "memory": "512",
   "networkMode": "awsvpc",
-  "pidMode": "task",
   "requiresCompatibilities": [
     "FARGATE"
   ],
