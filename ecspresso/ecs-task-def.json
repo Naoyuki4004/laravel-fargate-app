@@ -67,7 +67,7 @@
   "ipcMode": "",
   "memory": "512",
   "networkMode": "awsvpc",
-  "pidMode": "",
+  "pidMode": "task",
   "requiresCompatibilities": [
     "FARGATE"
   ],
